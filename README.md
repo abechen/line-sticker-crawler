@@ -2,7 +2,11 @@
 
 A **Line Sticker** downloader by python
 
-Module:
+**Script**:
+
+	python crawler.py 'https://store.line.me/stickershop/product/331/zh-Hant'
+
+**Module**:
 
 - requests
 - BeautifulSoup

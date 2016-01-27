@@ -4,6 +4,7 @@ import os
 import sys
 import requests
 from bs4 import BeautifulSoup
+from PIL import Image
 
 program = os.path.basename(sys.argv[0])
 logger = logging.getLogger(program)
@@ -42,6 +43,15 @@ def download_sticker(info):
             if chunk:
                 f.write(chunk)
 
+    convert_format(info['path'] + '/' + info['sid'])
+
+
+def convert_format(fn):
+    source = Image.open(fn+'.png').convert('RGBA')
+    bg = Image.new('RGBA', source.size, (255,255,255))
+    result = Image.alpha_composite(bg, source)
+    result.save(fn+'.jpg', 'JPEG', quality=80)
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 1:
@@ -57,10 +67,3 @@ if __name__ == '__main__':
         os.mkdir('download')
 
     main()
-
-
-
-
-
-
-
