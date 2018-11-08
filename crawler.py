@@ -29,10 +29,13 @@ def main():
     info['path'] = 'download/' + title
     info['type'] = '.png'
     for tag in soup.select('span'):
-        if 'data-sticker-id' in tag.attrs:
+        if tag.attrs.has_key('style') and 'background-image' in tag.attrs['style']:
             style = tag['style']
-            info['sid'] = tag['data-sticker-id']
-            info['url'] = style[style.rfind('(') + 1:style.rfind(')')]
+            url = style[style.rfind('(') + 1:style.rfind(')')]
+
+            info['url'] = url
+            info['sid'] = url.split("/")[6]
+
             download_sticker(info)
 
 
@@ -50,7 +53,7 @@ def convert_format(fn):
     source = Image.open(fn+'.png').convert('RGBA')
     bg = Image.new('RGBA', source.size, (255,255,255))
     result = Image.alpha_composite(bg, source)
-    result.save(fn+'.jpg', 'JPEG', quality=80)
+    result.save(fn+'.png', 'PNG', quality=80)
 
 
 if __name__ == '__main__':
