@@ -1,13 +1,19 @@
-# Crawler4LineSticker
+# line-sticker-crawler
 
 A **Line Sticker** downloader by python
 
-**Script**:
+## Install Environment
+```=shell
+sh bin/install-env.sh
+```
 
-	python crawler.py 'https://store.line.me/stickershop/product/331/zh-Hant'
+## Start Download
+```=shell
+sh bin/start-download.sh 'https://store.line.me/stickershop/product/331/zh-Hant'
+```
 
-**Module**:
-
-- requests
-- BeautifulSoup
-- lxml
+* Python Packages
+	* requests
+	* BeautifulSoup
+	* lxml
+	* Pillow
